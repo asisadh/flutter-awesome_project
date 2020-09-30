@@ -1,5 +1,6 @@
 import 'package:assesment/core/usecases/usecase.dart';
 import 'package:assesment/features/news/domain/entities/article.dart';
+import 'package:assesment/features/news/domain/entities/article_list.dart';
 import 'package:assesment/features/news/domain/repository/news_repository.dart';
 import 'package:assesment/features/news/domain/usecases/news_usecase.dart';
 import 'package:dartz/dartz.dart';
@@ -24,7 +25,7 @@ void main() {
     source: "source",
     sourceLogo: "sourceLogo",
   );
-  final newsList = [news];
+  final newsList = ArticlesList(articles: [news]);
 
   test('should get news from repository when news are available', () async {
     //arrange

@@ -4,6 +4,7 @@ import 'package:assesment/core/network/network_info.dart';
 import 'package:assesment/features/news/data/datasource/news_local_data_source.dart';
 import 'package:assesment/features/news/data/datasource/news_remote_data_source.dart';
 import 'package:assesment/features/news/data/models/article_model.dart';
+import 'package:assesment/features/news/data/models/news_list_model.dart';
 import 'package:assesment/features/news/data/repository/news_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -50,7 +51,7 @@ void main() {
     source: "source",
     sourceLogo: "sourceLogo",
   );
-  final newsList = [news];
+  final newsList = ArticlesListModel(articles: [news]);
 
   setUp(() {
     remoteDataSource = MockNewsRemoteDataSource();
