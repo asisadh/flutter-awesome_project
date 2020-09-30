@@ -3,7 +3,7 @@ import 'package:assesment/core/errors/failures.dart';
 import 'package:assesment/core/network/network_info.dart';
 import 'package:assesment/features/news/data/datasource/news_local_data_source.dart';
 import 'package:assesment/features/news/data/datasource/news_remote_data_source.dart';
-import 'package:assesment/features/news/domain/entities/news.dart';
+import 'package:assesment/features/news/domain/entities/article.dart';
 import 'package:assesment/features/news/domain/repository/news_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
@@ -20,7 +20,7 @@ class NewsRepository implements NewsRepositoryProtocol {
   });
 
   @override
-  Future<Either<Failure, List<News>>> fetchNews() async {
+  Future<Either<Failure, List<Article>>> fetchNews() async {
     final isNewtorkAvailable = await networkInfo.isConnected;
 
     if (isNewtorkAvailable) {

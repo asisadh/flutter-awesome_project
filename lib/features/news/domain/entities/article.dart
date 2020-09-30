@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
-class News extends Equatable {
+class Article extends Equatable {
   final String image;
   final String title;
   final String description;
   final String source;
   final String sourceLogo;
 
-  News({
+  Article({
     @required this.image,
     @required this.title,
     @required this.description,

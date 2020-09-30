@@ -3,7 +3,7 @@ import 'package:assesment/core/errors/failures.dart';
 import 'package:assesment/core/network/network_info.dart';
 import 'package:assesment/features/news/data/datasource/news_local_data_source.dart';
 import 'package:assesment/features/news/data/datasource/news_remote_data_source.dart';
-import 'package:assesment/features/news/data/models/news_model.dart';
+import 'package:assesment/features/news/data/models/article_model.dart';
 import 'package:assesment/features/news/data/repository/news_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -43,7 +43,7 @@ void main() {
     });
   }
 
-  final news = NewsModel(
+  final news = ArticleModel(
     image: "image",
     title: "title",
     description: "description",

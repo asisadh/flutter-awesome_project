@@ -1,5 +1,5 @@
 import 'package:assesment/core/usecases/usecase.dart';
-import 'package:assesment/features/news/domain/entities/news.dart';
+import 'package:assesment/features/news/domain/entities/article.dart';
 import 'package:assesment/features/news/domain/repository/news_repository.dart';
 import 'package:assesment/features/news/domain/usecases/news_usecase.dart';
 import 'package:dartz/dartz.dart';
@@ -17,7 +17,7 @@ void main() {
     newsUsecase = NewsUsecase(repository: mockRepository);
   });
 
-  final news = News(
+  final news = Article(
     image: "image",
     title: "title",
     description: "description",
