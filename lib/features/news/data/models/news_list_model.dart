@@ -16,6 +16,14 @@ class ArticlesListModel extends ArticlesList {
                 json["articles"].map((x) => ArticleModel.fromJson(x))),
       );
 
+  factory ArticlesListModel.fromCache(Map<String, dynamic> json) =>
+      ArticlesListModel(
+        articles: json["articles"] == null
+            ? null
+            : List<ArticleModel>.from(
+                json["articles"].map((x) => ArticleModel.fromCache(x))),
+      );
+
   Map<String, dynamic> toJson() => {
         "articles": articles == null
             ? null
