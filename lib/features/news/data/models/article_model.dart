@@ -17,11 +17,11 @@ class ArticleModel extends Article {
         );
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
-        image: json["urlToImage"] == null ? null : json["urlToImage"],
-        title: json["title"] == null ? null : json["title"],
-        description: json["description"] == null ? null : json["description"],
-        source: "",
-        sourceLogo: "",
+        image: json["urlToImage"],
+        title: json["title"],
+        description: json["description"],
+        source: json["source"]["name"],
+        sourceLogo: json["source"]["id"],
       );
 
   factory ArticleModel.fromCache(Map<String, dynamic> json) => ArticleModel(
