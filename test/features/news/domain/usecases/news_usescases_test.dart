@@ -2,7 +2,7 @@ import 'package:assesment/core/usecases/usecase.dart';
 import 'package:assesment/features/news/domain/entities/article.dart';
 import 'package:assesment/features/news/domain/entities/article_list.dart';
 import 'package:assesment/features/news/domain/repository/news_repository.dart';
-import 'package:assesment/features/news/domain/usecases/news_usecase.dart';
+import 'package:assesment/features/news/domain/usecases/get_latest_news.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -10,12 +10,12 @@ import 'package:mockito/mockito.dart';
 class MockNewsRepository extends Mock implements NewsRepositoryProtocol {}
 
 void main() {
-  NewsUsecase newsUsecase;
+  GetLatestNews newsUsecase;
   MockNewsRepository mockRepository;
 
   setUp(() {
     mockRepository = MockNewsRepository();
-    newsUsecase = NewsUsecase(repository: mockRepository);
+    newsUsecase = GetLatestNews(repository: mockRepository);
   });
 
   final news = Article(
