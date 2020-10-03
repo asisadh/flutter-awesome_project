@@ -6,7 +6,7 @@ abstract class NetworkInfoProtocol {
   Future<bool> get isConnected;
 }
 
-@lazySingleton
+@LazySingleton(as: NetworkInfoProtocol)
 class NetworkInfo implements NetworkInfoProtocol {
   final DataConnectionChecker dataConnectionChecker;
 

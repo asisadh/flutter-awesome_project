@@ -24,24 +24,24 @@ import 'injectable/shared_preference_module.dart';
 /// adds generated dependencies
 /// to the provided [GetIt] instance
 
-GetIt $initGetIt(
+Future<GetIt> $initGetIt(
   GetIt get, {
   String environment,
   EnvironmentFilter environmentFilter,
-}) {
+}) async {
   final gh = GetItHelper(get, environment, environmentFilter);
   final httpClientInjectableModule = _$HttpClientInjectableModule();
-  final sharedPreferenceModule = _$SharedPreferenceModule();
   final dataConnectionCheckerModule = _$DataConnectionCheckerModule();
+  final sharedPreferenceModule = _$SharedPreferenceModule();
   gh.factory<Client>(() => httpClientInjectableModule.client);
   gh.factory<DataConnectionChecker>(
-      () => sharedPreferenceModule.dataConnectionCheckerModule);
-  gh.lazySingleton<NetworkInfo>(
+      () => dataConnectionCheckerModule.dataConnectionCheckerModule);
+  gh.lazySingleton<NetworkInfoProtocol>(
       () => NetworkInfo(dataConnectionChecker: get<DataConnectionChecker>()));
   gh.lazySingleton<NewsRemoteDataSourceProtocol>(
       () => NewsRemoteDataSource(client: get<Client>()));
-  gh.factoryAsync<SharedPreferences>(
-      () => dataConnectionCheckerModule.sharedPreferences);
+  final sharedPreferences = await sharedPreferenceModule.prefs;
+  gh.factory<SharedPreferences>(() => sharedPreferences);
   gh.lazySingleton<NewsLocalDataSourceProtocol>(
       () => NewsLocalDataSource(sharedPreference: get<SharedPreferences>()));
   gh.lazySingleton<NewsRepositoryProtocol>(() => NewsRepository(
@@ -57,6 +57,6 @@ GetIt $initGetIt(
 
 class _$HttpClientInjectableModule extends HttpClientInjectableModule {}
 
-class _$SharedPreferenceModule extends SharedPreferenceModule {}
-
 class _$DataConnectionCheckerModule extends DataConnectionCheckerModule {}
+
+class _$SharedPreferenceModule extends SharedPreferenceModule {}
