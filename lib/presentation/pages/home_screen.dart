@@ -1,3 +1,4 @@
+import 'package:assesment/features/movies/presentation/bloc/movies_bloc.dart';
 import 'package:assesment/features/news/presentation/bloc/news_bloc.dart';
 import 'package:assesment/injection/injection.dart';
 import 'package:assesment/presentation/widgets/github_list.dart';
@@ -30,11 +31,16 @@ class HomeScreen extends StatelessWidget {
           create: (context) =>
               getIt<NewsBloc>()..add(const NewsEvent.fetchNews()),
         ),
+        BlocProvider<MoviesBloc>(
+          create: (context) =>
+              getIt<MoviesBloc>()..add(const MoviesEvent.fetchMovies()),
+        ),
       ],
       child: SingleChildScrollView(
         child: Column(
           children: [
             NewsListContainerWidget(),
+            MovieListContainerWidget(),
           ],
         ),
       ),

@@ -11,8 +11,13 @@ import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'injectable/data_connection_checker_module.dart';
+import '../features/movies/domain/usecases/get_latest_movie.dart';
 import '../features/news/domain/usecases/get_latest_news.dart';
 import 'injectable/http_client_injectable_module.dart';
+import '../features/movies/data/datasource/movie_remote_data_source.dart';
+import '../features/movies/data/repository/movie_repository.dart';
+import '../features/movies/domain/repository/movie_repository.dart';
+import '../features/movies/presentation/bloc/movies_bloc.dart';
 import '../core/network/network_info.dart';
 import '../features/news/presentation/bloc/news_bloc.dart';
 import '../features/news/data/datasource/news_local_data_source.dart';
@@ -36,12 +41,20 @@ Future<GetIt> $initGetIt(
   gh.factory<Client>(() => httpClientInjectableModule.client);
   gh.factory<DataConnectionChecker>(
       () => dataConnectionCheckerModule.dataConnectionCheckerModule);
+  gh.lazySingleton<MovieRemoteDataSourceProtocol>(
+      () => MovieRemoteDataSource());
+  gh.lazySingleton<MovieRepositoryProtocol>(
+      () => MovieRepository(dataSource: get<MovieRemoteDataSourceProtocol>()));
   gh.lazySingleton<NetworkInfoProtocol>(
       () => NetworkInfo(dataConnectionChecker: get<DataConnectionChecker>()));
   gh.lazySingleton<NewsRemoteDataSourceProtocol>(
       () => NewsRemoteDataSource(client: get<Client>()));
   final sharedPreferences = await sharedPreferenceModule.prefs;
   gh.factory<SharedPreferences>(() => sharedPreferences);
+  gh.lazySingleton<GetLatestMovies>(
+      () => GetLatestMovies(repository: get<MovieRepositoryProtocol>()));
+  gh.factory<MoviesBloc>(
+      () => MoviesBloc(getLatestMovies: get<GetLatestMovies>()));
   gh.lazySingleton<NewsLocalDataSourceProtocol>(
       () => NewsLocalDataSource(sharedPreference: get<SharedPreferences>()));
   gh.lazySingleton<NewsRepositoryProtocol>(() => NewsRepository(
