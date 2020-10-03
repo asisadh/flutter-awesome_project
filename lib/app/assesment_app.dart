@@ -1,3 +1,4 @@
+import 'package:assesment/presentation/pages/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class AssesmentApp extends StatelessWidget {
@@ -11,9 +12,7 @@ class AssesmentApp extends StatelessWidget {
         // fontFamily: 'Poppins',
       ),
       debugShowCheckedModeBanner: true,
-      home: Container(
-        color: Colors.white,
-      ),
+      home: HomeScreen(),
     );
   }
 }

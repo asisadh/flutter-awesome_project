@@ -5,6 +5,7 @@ import 'package:assesment/features/news/data/models/article_model.dart';
 import 'package:assesment/features/news/data/models/news_list_model.dart';
 import 'package:assesment/utils/app_constants.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class NewsLocalDataSourceProtocol {
@@ -17,6 +18,7 @@ abstract class NewsLocalDataSourceProtocol {
   Future<void> cacheNews(ArticlesListModel newsList);
 }
 
+@LazySingleton(as: NewsLocalDataSourceProtocol)
 class NewsLocalDataSource implements NewsLocalDataSourceProtocol {
   final SharedPreferences sharedPreference;
 

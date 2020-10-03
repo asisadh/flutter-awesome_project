@@ -7,7 +7,9 @@ import 'package:assesment/features/news/data/models/news_list_model.dart';
 import 'package:assesment/features/news/domain/repository/news_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: NewsRepositoryProtocol)
 class NewsRepository implements NewsRepositoryProtocol {
   final NewsRemoteDataSourceProtocol remoteDataSource;
   final NewsLocalDataSourceProtocol localDataSource;

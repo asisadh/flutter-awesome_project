@@ -4,7 +4,9 @@ import 'package:assesment/features/news/domain/entities/article_list.dart';
 import 'package:assesment/features/news/domain/repository/news_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 
+@lazySingleton
 class GetLatestNews extends Usecase<ArticlesList, NoParams> {
   final NewsRepositoryProtocol repository;
 

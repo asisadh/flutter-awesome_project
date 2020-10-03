@@ -5,11 +5,13 @@ import 'package:assesment/features/news/domain/entities/article_list.dart';
 import 'package:assesment/features/news/domain/usecases/get_latest_news.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'news_event.dart';
 part 'news_state.dart';
 part 'news_bloc.freezed.dart';
 
+@injectable
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   final GetLatestNews getLatestNews;
 
