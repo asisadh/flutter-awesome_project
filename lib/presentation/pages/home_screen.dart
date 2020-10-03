@@ -1,5 +1,6 @@
 import 'package:assesment/features/movies/presentation/bloc/movies_bloc.dart';
 import 'package:assesment/features/news/presentation/bloc/news_bloc.dart';
+import 'package:assesment/features/restaurants/presentation/bloc/restaurant_bloc.dart';
 import 'package:assesment/injection/injection.dart';
 import 'package:assesment/presentation/widgets/github_list.dart';
 import 'package:assesment/presentation/widgets/movie_list.dart';
@@ -35,12 +36,17 @@ class HomeScreen extends StatelessWidget {
           create: (context) =>
               getIt<MoviesBloc>()..add(const MoviesEvent.fetchMovies()),
         ),
+        BlocProvider<RestaurantBloc>(
+          create: (context) => getIt<RestaurantBloc>()
+            ..add(const RestaurantEvent.fetchRestaurant()),
+        ),
       ],
       child: SingleChildScrollView(
         child: Column(
           children: [
             NewsListContainerWidget(),
             MovieListContainerWidget(),
+            ResturantListContainerWidget(),
           ],
         ),
       ),
