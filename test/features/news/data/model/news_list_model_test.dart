@@ -16,6 +16,7 @@ void main() {
         "Legendary country singer and songwriter Mac Davis has died at the age of  78 following heart surgery.",
     source: "CNN",
     sourceLogo: "cnn",
+    url: "url",
   );
 
   final testModel = ArticlesListModel(articles: [article]);
@@ -29,7 +30,8 @@ void main() {
     test('Should return a valid model when the JSON has values.', () async {
       //arrange
       String stringJSON = stub(path: 'news', name: 'news_list.json');
-      final Map<String, dynamic> jsonMap = json.decode(stringJSON);
+      final Map<String, dynamic> jsonMap =
+          json.decode(stringJSON) as Map<String, dynamic>;
 
       //act
       final result = ArticlesListModel.fromJson(jsonMap);

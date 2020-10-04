@@ -31,11 +31,15 @@ class ResturantsFromPlaces implements ResturantsFromPlacesProtocol {
         final name = data["properties"]["name"];
         final address = data["properties"]["formatted"];
         final distance = data["properties"]["distance"];
+        final lat = data["properties"]["lat"];
+        final lon = data["properties"]["lon"];
 
         final map = Map<String, dynamic>();
         map["name"] = name;
         map["address"] = address;
         map["distance"] = distance;
+        map["lat"] = lat;
+        map["lon"] = lon;
 
         formattedData.add(map);
       }

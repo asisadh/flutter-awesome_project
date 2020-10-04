@@ -1,7 +1,9 @@
 import 'package:assesment/features/news/domain/entities/article.dart';
 import 'package:assesment/features/news/domain/entities/article_list.dart';
 import 'package:assesment/features/news/presentation/bloc/news_bloc.dart';
+import 'package:assesment/presentation/routes/router.gr.dart';
 import 'package:assesment/presentation/widgets/loading.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -98,16 +100,13 @@ class NewsItem extends StatelessWidget {
               child: Container(
                 width: double.maxFinite,
                 padding: EdgeInsets.all(20),
-                color: Colors.white,
+                color: Theme.of(context).cardColor,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       article.title ?? "N/A",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: Theme.of(context).textTheme.headline1,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -136,15 +135,22 @@ class NewsItem extends StatelessWidget {
                     Spacer(),
                     SizedBox(
                       height: 30,
-                      width: 60,
+                      width: 90,
                       child: FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          ExtendedNavigator.of(context).push(
+                            Routes.appWebView,
+                            arguments: AppWebViewArguments(
+                              url: article.url,
+                            ),
+                          );
+                        },
                         color: Colors.blue,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
                         child: Text(
-                          "Save",
+                          "view more",
                           style: TextStyle(
                             fontSize: 10,
                             color: Colors.white,

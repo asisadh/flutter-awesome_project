@@ -9,19 +9,27 @@ class RestaurantModel extends Restaurant {
   RestaurantModel({
     @required String name,
     @required String address,
+    @required double lat,
+    @required double lon,
   }) : super(
           name: name,
           address: address,
+          lat: lat,
+          lon: lon,
         );
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
       RestaurantModel(
         address: json["address"],
         name: json["name"],
+        lat: json["lat"],
+        lon: json["lon"],
       );
 
   Map<String, dynamic> toJson() => {
         "image": address ?? "",
         "name": name ?? "",
+        "lat": lat ?? "",
+        "lon": lon ?? "",
       };
 }

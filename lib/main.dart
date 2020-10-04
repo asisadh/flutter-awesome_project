@@ -8,7 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureInjection(Environment.prod);
 
-  /// I'm being forced to do some delay before runApp, otherwise it says that my factories aren't registered at GetIt
+  /// for registering the factory.
   await Future.delayed(const Duration(seconds: 2));
   runApp(AssesmentApp());
 }

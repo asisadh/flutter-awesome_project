@@ -1,6 +1,9 @@
 import 'package:assesment/features/movies/domain/entities/movie.dart';
 import 'package:assesment/features/movies/presentation/bloc/movies_bloc.dart';
+import 'package:assesment/presentation/routes/router.gr.dart';
 import 'package:assesment/utils/colors.dart';
+import 'package:assesment/utils/launch_in_browser.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -82,60 +85,70 @@ class MovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        decoration: new BoxDecoration(
-          borderRadius: new BorderRadius.all(Radius.circular(20.0)),
-          color: Palette.white,
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              flex: 3,
-              child: Image.network(movie.image ?? "", fit: BoxFit.cover),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              flex: 7,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    movie.name ?? "",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  Spacer(),
-                  Row(
-                    children: [
-                      Text(
-                        "Movie",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                      Spacer(),
-                      Text(
-                        "${movie.rating ?? 0}/10 IMDB",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ],
-                  )
-                ],
+    return GestureDetector(
+      onTap: () {
+        ExtendedNavigator.of(context).push(
+          Routes.appWebView,
+          arguments: AppWebViewArguments(
+            url: movie.youtubeUrl,
+          ),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          decoration: new BoxDecoration(
+            borderRadius: new BorderRadius.all(Radius.circular(20.0)),
+            color: Theme.of(context).cardColor,
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 3,
+                child: Image.network(movie.image ?? "", fit: BoxFit.cover),
               ),
-            )
-          ],
+              SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                flex: 7,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      movie.name ?? "",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Spacer(),
+                    Row(
+                      children: [
+                        Text(
+                          "Movie",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                        Spacer(),
+                        Text(
+                          "${movie.rating ?? 0}/10 IMDB",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

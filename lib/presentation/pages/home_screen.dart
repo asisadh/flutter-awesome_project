@@ -3,6 +3,8 @@ import 'package:assesment/features/movies/presentation/bloc/movies_bloc.dart';
 import 'package:assesment/features/news/presentation/bloc/news_bloc.dart';
 import 'package:assesment/features/restaurants/presentation/bloc/restaurant_bloc.dart';
 import 'package:assesment/injection/injection.dart';
+import 'package:assesment/presentation/theme/app_themes.dart';
+import 'package:assesment/presentation/theme/bloc/theme_bloc.dart';
 import 'package:assesment/presentation/widgets/github_list.dart';
 import 'package:assesment/presentation/widgets/movie_list.dart';
 import 'package:assesment/presentation/widgets/news_list.dart';
@@ -20,13 +22,12 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Container(
         // height: double.maxFinite,
-        color: Palette.background,
-        child: buildHomePageWidget(),
+        child: buildHomePageWidget(context),
       ),
     );
   }
 
-  MultiBlocProvider buildHomePageWidget() {
+  MultiBlocProvider buildHomePageWidget(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider<NewsBloc>(
@@ -46,15 +47,47 @@ class HomeScreen extends StatelessWidget {
               getIt<GithubBloc>()..add(const GithubEvent.fetchRepo()),
         ),
       ],
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            NewsListContainerWidget(),
-            MovieListContainerWidget(),
-            ResturantListContainerWidget(),
-            GitHubListContainerWidget(),
-          ],
-        ),
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                NewsListContainerWidget(),
+                MovieListContainerWidget(),
+                ResturantListContainerWidget(),
+                GitHubListContainerWidget(),
+              ],
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: Container(
+                margin: const EdgeInsets.only(bottom: 20, right: 20),
+                // child: FloatingActionButton.extended(
+                //   backgroundColor: ,
+                //   foregroundColor: Colors.black,
+                //   onPressed: () {
+                //     // Respond to button press
+                //     BlocProvider.of<ThemeBloc>(context)
+                //         .add(ThemeEvent.changeTheme());
+                //   },
+                //   icon: Icon(Icons.add_to_home_screen),
+                //   label: Text(
+                //     '',
+                //     style: Theme.of(context).textTheme.headline1,
+                //   ),
+                // ),
+                child: FloatingActionButton(
+                  backgroundColor: Theme.of(context).backgroundColor,
+                  foregroundColor: Theme.of(context).buttonColor,
+                  onPressed: () {
+                    BlocProvider.of<ThemeBloc>(context)
+                        .add(ThemeEvent.changeTheme());
+                  },
+                  child: Icon(Icons.add),
+                )),
+          )
+        ],
       ),
     );
   }

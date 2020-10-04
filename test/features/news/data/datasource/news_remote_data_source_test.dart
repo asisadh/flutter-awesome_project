@@ -41,6 +41,7 @@ main() {
         "Legendary country singer and songwriter Mac Davis has died at the age of  78 following heart surgery.",
     source: "CNN",
     sourceLogo: "cnn",
+    url: "url",
   );
 
   final testModel = ArticlesListModel(articles: [article]);

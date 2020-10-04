@@ -1,5 +1,8 @@
 import 'package:assesment/features/restaurants/domain/entities/restaurant.dart';
 import 'package:assesment/features/restaurants/presentation/bloc/restaurant_bloc.dart';
+import 'package:assesment/presentation/routes/router.gr.dart';
+import 'package:assesment/utils/launch_in_browser.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -93,7 +96,7 @@ class ResturantItem extends StatelessWidget {
         ),
         child: Container(
           padding: EdgeInsets.all(20),
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -121,7 +124,15 @@ class ResturantItem extends StatelessWidget {
                 height: 30,
                 width: 100,
                 child: FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ExtendedNavigator.of(context).push(
+                      Routes.appWebView,
+                      arguments: AppWebViewArguments(
+                        url:
+                            "https://maps.google.com/?q=@${restaurant.lat},${restaurant.lon}&directionsmode=driving",
+                      ),
+                    );
+                  },
                   color: Colors.blue,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),

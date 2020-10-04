@@ -24,6 +24,7 @@ void main() {
     description: "description",
     source: "source",
     sourceLogo: "sourceLogo",
+    url: "url",
   );
   final newsList = ArticlesList(articles: [news]);
 

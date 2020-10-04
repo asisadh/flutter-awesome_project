@@ -8,12 +8,14 @@ class ArticleModel extends Article {
     @required String description,
     @required String source,
     @required String sourceLogo,
+    @required String url,
   }) : super(
           image: image,
           title: title,
           description: description,
           source: source,
           sourceLogo: sourceLogo,
+          url: url,
         );
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) => ArticleModel(
@@ -22,6 +24,7 @@ class ArticleModel extends Article {
         description: json["description"],
         source: json["source"]["name"],
         sourceLogo: json["source"]["id"],
+        url: json["url"],
       );
 
   factory ArticleModel.fromCache(Map<String, dynamic> json) => ArticleModel(
@@ -30,6 +33,7 @@ class ArticleModel extends Article {
         description: json["description"],
         source: json["source"],
         sourceLogo: json["source_logo"],
+        url: json["url"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -38,5 +42,6 @@ class ArticleModel extends Article {
         "description": description ?? "",
         "source": source ?? "",
         "source_logo": "",
+        "url": url ?? "",
       };
 }

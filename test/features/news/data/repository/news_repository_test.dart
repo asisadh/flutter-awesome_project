@@ -50,6 +50,7 @@ void main() {
     description: "description",
     source: "source",
     sourceLogo: "sourceLogo",
+    url: "url",
   );
   final newsList = ArticlesListModel(articles: [news]);
 

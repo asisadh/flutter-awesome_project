@@ -7,6 +7,7 @@ class Article extends Equatable {
   final String description;
   final String source;
   final String sourceLogo;
+  final String url;
 
   Article({
     @required this.image,
@@ -14,6 +15,7 @@ class Article extends Equatable {
     @required this.description,
     @required this.source,
     @required this.sourceLogo,
+    @required this.url,
   });
 
   @override
@@ -23,5 +25,6 @@ class Article extends Equatable {
         description,
         source,
         sourceLogo,
+        url,
       ];
 }
