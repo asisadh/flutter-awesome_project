@@ -13,7 +13,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'injectable/data_connection_checker_module.dart';
 import '../features/movies/domain/usecases/get_latest_movie.dart';
 import '../features/news/domain/usecases/get_latest_news.dart';
+import '../features/github/domain/usecases/get_list_of_repo.dart';
 import '../features/restaurants/domain/usecases/getRestaurants.dart';
+import '../features/github/data/data_source/github_remote_datasource.dart';
+import '../core/git_hub_repo/git_hub_repo.dart';
+import '../features/github/presentation/bloc/github_bloc.dart';
+import '../features/github/data/repository/github_repository.dart';
+import '../features/github/domain/repository/github_repository.dart';
 import 'injectable/http_client_injectable_module.dart';
 import '../features/movies/data/datasource/movie_remote_data_source.dart';
 import '../features/movies/data/repository/movie_repository.dart';
@@ -47,6 +53,7 @@ Future<GetIt> $initGetIt(
   gh.factory<Client>(() => httpClientInjectableModule.client);
   gh.factory<DataConnectionChecker>(
       () => dataConnectionCheckerModule.dataConnectionCheckerModule);
+  gh.lazySingleton<GitHubRepoProtocol>(() => GitHubRepo(client: get<Client>()));
   gh.lazySingleton<MovieRemoteDataSourceProtocol>(
       () => MovieRemoteDataSource());
   gh.lazySingleton<MovieRepositoryProtocol>(
@@ -61,6 +68,10 @@ Future<GetIt> $initGetIt(
   gh.factory<SharedPreferences>(() => sharedPreferences);
   gh.lazySingleton<GetLatestMovies>(
       () => GetLatestMovies(repository: get<MovieRepositoryProtocol>()));
+  gh.lazySingleton<GitHubRemoteDataSourceProtocol>(
+      () => GitHubRemoteDataSource(gitHubRepo: get<GitHubRepoProtocol>()));
+  gh.lazySingleton<GithubRepositoryProtocol>(() => GithubRepository(
+      remoteDataSource: get<GitHubRemoteDataSourceProtocol>()));
   gh.factory<MoviesBloc>(
       () => MoviesBloc(getLatestMovies: get<GetLatestMovies>()));
   gh.lazySingleton<NewsLocalDataSourceProtocol>(
@@ -75,6 +86,9 @@ Future<GetIt> $initGetIt(
           resturantsFromPlaces: get<ResturantsFromPlacesProtocol>()));
   gh.lazySingleton<GetLatestNews>(
       () => GetLatestNews(repository: get<NewsRepositoryProtocol>()));
+  gh.lazySingleton<GetListOfRepo>(
+      () => GetListOfRepo(repository: get<GithubRepositoryProtocol>()));
+  gh.factory<GithubBloc>(() => GithubBloc(getListOfRepo: get<GetListOfRepo>()));
   gh.factory<NewsBloc>(() => NewsBloc(getLatestNews: get<GetLatestNews>()));
   gh.lazySingleton<RestaurantRepositoryProtocol>(() => RestaurantRepository(
       remoteDataSourceProtocol: get<ResturantRemoteDataSourceProtocol>()));

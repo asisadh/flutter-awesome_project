@@ -1,3 +1,4 @@
+import 'package:assesment/features/github/presentation/bloc/github_bloc.dart';
 import 'package:assesment/features/movies/presentation/bloc/movies_bloc.dart';
 import 'package:assesment/features/news/presentation/bloc/news_bloc.dart';
 import 'package:assesment/features/restaurants/presentation/bloc/restaurant_bloc.dart';
@@ -40,6 +41,10 @@ class HomeScreen extends StatelessWidget {
           create: (context) => getIt<RestaurantBloc>()
             ..add(const RestaurantEvent.fetchRestaurant()),
         ),
+        BlocProvider<GithubBloc>(
+          create: (context) =>
+              getIt<GithubBloc>()..add(const GithubEvent.fetchRepo()),
+        ),
       ],
       child: SingleChildScrollView(
         child: Column(
@@ -47,6 +52,7 @@ class HomeScreen extends StatelessWidget {
             NewsListContainerWidget(),
             MovieListContainerWidget(),
             ResturantListContainerWidget(),
+            GitHubListContainerWidget(),
           ],
         ),
       ),
