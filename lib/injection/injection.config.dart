@@ -10,6 +10,7 @@ import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../features/awesome/bloc/awesome_bloc.dart';
 import 'injectable/data_connection_checker_module.dart';
 import '../features/movies/domain/usecases/get_latest_movie.dart';
 import '../features/news/domain/usecases/get_latest_news.dart';
@@ -50,6 +51,7 @@ Future<GetIt> $initGetIt(
   final httpClientInjectableModule = _$HttpClientInjectableModule();
   final dataConnectionCheckerModule = _$DataConnectionCheckerModule();
   final sharedPreferenceModule = _$SharedPreferenceModule();
+  gh.factory<AwesomeBloc>(() => AwesomeBloc());
   gh.factory<Client>(() => httpClientInjectableModule.client);
   gh.factory<DataConnectionChecker>(
       () => dataConnectionCheckerModule.dataConnectionCheckerModule);

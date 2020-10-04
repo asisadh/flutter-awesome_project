@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
 
   Widget buildBody(BuildContext context) {
     Timer.periodic(Duration(seconds: 5), (timer) {
-      ExtendedNavigator.of(context).replace(Routes.homeScreen);
+      ExtendedNavigator.of(context).popAndPush(Routes.homeScreen);
     });
     return Center(
       child: Image(
