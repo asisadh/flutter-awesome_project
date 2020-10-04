@@ -1,3 +1,4 @@
+import 'package:assesment/features/awesome/bloc/awesome_bloc.dart';
 import 'package:assesment/features/github/domain/entities/git_hub.dart';
 import 'package:assesment/features/github/presentation/bloc/github_bloc.dart';
 import 'package:assesment/presentation/routes/router.gr.dart';
@@ -88,6 +89,7 @@ class GitHubItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        BlocProvider.of<AwesomeBloc>(context).add(AwesomeEvent.pressed());
         ExtendedNavigator.of(context).push(
           Routes.appWebView,
           arguments: AppWebViewArguments(

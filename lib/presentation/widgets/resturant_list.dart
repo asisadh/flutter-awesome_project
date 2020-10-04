@@ -1,3 +1,4 @@
+import 'package:assesment/features/awesome/bloc/awesome_bloc.dart';
 import 'package:assesment/features/restaurants/domain/entities/restaurant.dart';
 import 'package:assesment/features/restaurants/presentation/bloc/restaurant_bloc.dart';
 import 'package:assesment/presentation/routes/router.gr.dart';
@@ -125,6 +126,8 @@ class ResturantItem extends StatelessWidget {
                 width: 100,
                 child: FlatButton(
                   onPressed: () {
+                    BlocProvider.of<AwesomeBloc>(context)
+                        .add(AwesomeEvent.pressed());
                     ExtendedNavigator.of(context).push(
                       Routes.appWebView,
                       arguments: AppWebViewArguments(

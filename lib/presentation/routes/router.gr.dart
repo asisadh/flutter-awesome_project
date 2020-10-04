@@ -10,6 +10,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../pages/app_web_view.dart';
+import '../pages/awesome_page.dart';
 import '../pages/home_screen.dart';
 import '../pages/splash_screen.dart';
 
@@ -17,10 +18,12 @@ class Routes {
   static const String splashScreen = '/';
   static const String homeScreen = '/home-screen';
   static const String appWebView = '/app-web-view';
+  static const String awesomeScreen = '/awesome-screen';
   static const all = <String>{
     splashScreen,
     homeScreen,
     appWebView,
+    awesomeScreen,
   };
 }
 
@@ -31,6 +34,7 @@ class Router extends RouterBase {
     RouteDef(Routes.splashScreen, page: SplashScreen),
     RouteDef(Routes.homeScreen, page: HomeScreen),
     RouteDef(Routes.appWebView, page: AppWebView),
+    RouteDef(Routes.awesomeScreen, page: AwesomeScreen),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -57,6 +61,12 @@ class Router extends RouterBase {
         settings: data,
       );
     },
+    AwesomeScreen: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AwesomeScreen(),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -77,6 +87,8 @@ extension RouterExtendedNavigatorStateX on ExtendedNavigatorState {
         Routes.appWebView,
         arguments: AppWebViewArguments(key: key, url: url),
       );
+
+  Future<dynamic> pushAwesomeScreen() => push<dynamic>(Routes.awesomeScreen);
 }
 
 /// ************************************************************************

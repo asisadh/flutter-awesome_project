@@ -1,3 +1,4 @@
+import 'package:assesment/features/awesome/bloc/awesome_bloc.dart';
 import 'package:assesment/features/movies/domain/entities/movie.dart';
 import 'package:assesment/features/movies/presentation/bloc/movies_bloc.dart';
 import 'package:assesment/presentation/routes/router.gr.dart';
@@ -87,6 +88,7 @@ class MovieItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        BlocProvider.of<AwesomeBloc>(context).add(AwesomeEvent.pressed());
         ExtendedNavigator.of(context).push(
           Routes.appWebView,
           arguments: AppWebViewArguments(

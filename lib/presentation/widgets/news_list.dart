@@ -1,3 +1,4 @@
+import 'package:assesment/features/awesome/bloc/awesome_bloc.dart';
 import 'package:assesment/features/news/domain/entities/article.dart';
 import 'package:assesment/features/news/domain/entities/article_list.dart';
 import 'package:assesment/features/news/presentation/bloc/news_bloc.dart';
@@ -138,6 +139,8 @@ class NewsItem extends StatelessWidget {
                       width: 90,
                       child: FlatButton(
                         onPressed: () {
+                          BlocProvider.of<AwesomeBloc>(context)
+                              .add(AwesomeEvent.pressed());
                           ExtendedNavigator.of(context).push(
                             Routes.appWebView,
                             arguments: AppWebViewArguments(
