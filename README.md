@@ -43,6 +43,8 @@ All The views are kept in presentation layer. And keep track of user inputs and 
 ### iOS
 ![](https://github.com/asisadh/flutter-awesome_project/blob/master/demo/ios.gif?raw=true)
 
+## Testing
+Unit test cases are added for the news module.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
